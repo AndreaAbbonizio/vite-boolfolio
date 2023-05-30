@@ -43,6 +43,16 @@ export default {
 
             <h5 class="card-title">{{ project.title }}</h5>
 
+            <small class="text-secondary">({{ project.type ? project.type.name : 'tipo non specificato' }})</small>
+
+
+            <div class="technologies d-flex flex-wrap gap-2">
+                <span v-for="technology in project.technologies" :style="{ 'background-color': technology.color }"
+                    class="badge rounded-pill text-white">{{
+                        technology.name }}</span>
+            </div>
+
+
 
 
             <p class="card-text"> {{ shortContent }} </p>

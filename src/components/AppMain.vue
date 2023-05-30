@@ -10,7 +10,13 @@ export default {
 
     data() {
         return {
+
+            apiUrl: 'http://127.0.0.1:8000/api/projects',
+
             projects: [],
+
+
+            pagination: {},
         }
     },
 
@@ -19,15 +25,17 @@ export default {
     },
 
     created() {
-        this.getProjects();
+        this.getProjects(this.apiUrl);
     },
 
     methods: {
-        getProjects() {
+        getProjects(apiUrl) {
 
-            axios.get('http://127.0.0.1:8000/api/projects').then(response => {
+            axios.get(apiUrl).then(response => {
                 console.log(response.data.results);
-                this.projects = response.data.results;
+                this.projects = response.data.results.data;
+
+                this.pagination = response.data.results;
             });
 
         },
@@ -50,6 +58,16 @@ export default {
                     <ProjectCard :project="project"></ProjectCard>
 
                 </div>
+            </div>
+
+            <hr>
+
+            <div class="page-controller d-flex justify-content-center gap-2 py-4">
+                <button v-for="link in pagination.links" class="btn"
+                    :class="link.active ? 'btn-primary' : 'btn-outline-secondary'" v-html="link.label"
+                    :disabled="link.url == null ? true : false" @click="getProjects(link.url)">
+
+                </button>
             </div>
         </div>
 
