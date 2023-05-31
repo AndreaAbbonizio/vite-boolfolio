@@ -11,11 +11,13 @@ export default {
     data() {
         return {
 
-            apiUrl: 'http://127.0.0.1:8000/api/projects',
-
             projects: [],
-
-
+            currentPage: 1,
+            types: [],
+            selectedTypeId: '',
+            projectsFound: false,
+            isLoading: true,
+            apiUrl: 'http://127.0.0.1:8000/api/projects',
             pagination: {},
         }
     },
@@ -30,27 +32,54 @@ export default {
 
     methods: {
         getProjects(apiUrl) {
-
             axios.get(apiUrl).then(response => {
-                console.log(response.data.results);
                 this.projects = response.data.results.data;
-
+                this.types = response.data.allTypes;
                 this.pagination = response.data.results;
             });
 
         },
 
-    },
+        getProjectsForm() {
+            axios.get('http://127.0.0.1:8000/api/projects?page=' + this.currentPage + '&type_id=' + this.selectedTypeId).then(response => {
+
+                console.log(response);
+                this.isLoading = false;
+                if (response.data.success) {
+
+                    this.projects = response.data.results;
+                    console.log(this.projects);
+                    this.types = response.data.allTypes;
+                    this.projectsFound = true;
+                } else {
+                    this.projectsFound = false;
+                }
+            });
+        }
+    }
 }
 </script>
 
 <template>
     <main>
+        <h1>Tutti i progetti</h1>
+
+        <hr>
+
+        <form @submit.prevent="" action="" class="d-flex">
+
+            <select name="type_id" id="type_id" class="form-select" v-model="selectedTypeId" @change="getProjectsForm()">
+
+                <option value="">Tutte</option>
+
+                <option v-for="singleType in types" :value="singleType.id">{{ singleType.name }}</option>
+
+            </select>
+
+
+        </form>
 
         <div v-if="projects.length > 0" class="container pt-5">
-            <h1>Tutti i progetti</h1>
-
-            <hr>
 
             <div class="row">
                 <div v-for="project in projects" class="col-4 mb-5">
@@ -78,7 +107,7 @@ export default {
         </div>
 
     </main>
-</template>
+</template> 
   
 
   

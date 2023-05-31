@@ -16,7 +16,6 @@ export default {
         console.log(this.$route.params.slug);
         this.projectSlug = this.$route.params.slug;
 
-        console.log(this.projectSlug);
         this.getProject();
 
     },
