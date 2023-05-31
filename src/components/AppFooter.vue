@@ -11,17 +11,17 @@ export default {
 </script>
 
 <template>
-    <footer class="py-3 bg-dark">
-        <ul class="nav justify-content-center border-bottom pb-3 mb-3 text-primary">
+    <footer class="py-3">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item">
-                <router-link class="nav-link" :to="{ name: 'home' }">Home</router-link>
+                <router-link class="nav-link text-white" :to="{ name: 'home' }">Home</router-link>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link" :to="{ name: 'projects.index' }">Tutti i progetti</router-link>
+                <router-link class="nav-link text-white" :to="{ name: 'projects.index' }">Tutti i progetti</router-link>
             </li>
 
             <li class="nav-item">
-                <router-link class="nav-link" :to="{ name: 'about-us' }">About</router-link>
+                <router-link class="nav-link text-white" :to="{ name: 'about' }">About</router-link>
             </li>
 
 
@@ -32,7 +32,10 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.nav-link {
+.router-link-active {
+    background-color: #b22222c9;
     color: white;
+    font-weight: bold;
+
 }
 </style>

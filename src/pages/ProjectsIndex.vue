@@ -85,6 +85,12 @@ export default {
 
 
 <style lang="scss">
+main {
+    height: calc(100vh - 204px);
+    width: 100%;
+    overflow-y: auto;
+}
+
 .loading-screen {
     display: flex;
     justify-content: center;

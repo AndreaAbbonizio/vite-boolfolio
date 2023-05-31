@@ -11,7 +11,7 @@ export default {
         <h2>Visualizza tutti i progetti </h2>
 
         <hr>
-        <router-link :to="{ name: 'about-us' }">Vai alla pagina di about</router-link>
+        <router-link class="btn btn-primary" :to="{ name: 'projects.index' }">Vai ai progetti</router-link>
     </div>
 </template>
 

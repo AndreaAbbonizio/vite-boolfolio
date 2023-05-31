@@ -46,7 +46,7 @@ export default {
             <small class="text-secondary">({{ project.type ? project.type.name : 'tipo non specificato' }})</small>
 
 
-            <div class="technologies d-flex flex-wrap gap-2">
+            <div class="technologies d-flex flex-wrap gap-2 my-3">
                 <span v-for="technology in project.technologies" :style="{ 'background-color': technology.color }"
                     class="badge rounded-pill text-white">{{
                         technology.name }}</span>
@@ -60,11 +60,22 @@ export default {
 
         </div>
 
+
+        <div class=" py-3 ms-2">
+
+            <router-link class="btn btn-primary"
+                :to="{ name: 'projects.show', params: { slug: project.slug } }">Mostra</router-link>
+        </div>
+
+
+
     </div>
 </template>
 
 <style lang="scss" scoped>
 .project.card {
+    height: 480px;
+
     .link-image {
         height: 200px;
 
